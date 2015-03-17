@@ -8,8 +8,12 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var sourcemaps = require('gulp-sourcemaps');
-
+var buildDir = require("../config").buildDir 
 var handleErrors = require('../util/handleErrors');
+
+console.log("buildDir = ",buildDir)
+
+
 /*
 gulp.task('vendor', function() {
     return gulp.src('vendor*/
@@ -25,11 +29,11 @@ gulp.task('concat' , function() {
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest(buildDir))
         .pipe(filesize())
         .pipe(uglify())
         .pipe(rename('app.min.js'))
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest(buildDir))
         .pipe(filesize())
         //.on('error', gutil.log);
         .on('error', handleErrors);

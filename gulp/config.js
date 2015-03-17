@@ -1,0 +1,1 @@
+exports.buildDir = "../../build"
