@@ -11,7 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var buildDir = require("../config").buildDir 
 var handleErrors = require('../util/handleErrors');
 
-console.log("buildDir = ",buildDir)
+console.log("buildDir = ", buildDir);
 
 
 /*

@@ -1,1 +1,1 @@
-exports.buildDir = "../../build"
+exports.buildDir = "../TV2FanProduction/public/screen"
