@@ -8,7 +8,13 @@ angular.module("screenModule", [])
         vm.main.setupTestBtns()
 
         var host = document.location.hostname; 
-        var datastringUrl =  host === 'localhost' ? 'http://localhost:3000/onair/get_datastring' : 'fan.tv2.dk/onair/get_datastring';
+        var datastringUrl;
+        if(host === 'localhost'){
+        	datastringUrl = 'http://localhost:3000/onair/get_datastring';
+        }
+        else{
+        	datastringUrl = 'http://fan.tv2.dk/onair/get_datastring';
+        }
 
 		$interval(function(){
 			$http.get(datastringUrl).success(function(data){
@@ -43,9 +49,9 @@ angular.module("screenModule", [])
 						console.log("QUIZEND ::: " + winnername + " ::: " + avatar);
 						//TODO: If no winner, only show correct answer
 						vm.main.hideQuestion();
-						$timeout(function(){
-							vm.main.showWinner("winner.jpg", "kenneth");
-						}, 5000);
+						// $timeout(function(){
+						// 	vm.main.showWinner("http://fan.tv2.dk/winner.jpg", "kenneth");
+						// }, 5000);
 						break;
 
 					case "RATINGEND":
