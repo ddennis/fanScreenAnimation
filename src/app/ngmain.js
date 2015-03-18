@@ -60,13 +60,13 @@ angular.module("screenModule", [])
 						if(avatar){
 							console.log("rate player");
 							//rate player
-							//TODO: Change to showRating when available
-							vm.main.showWinner(".." + avatar, result);
+							vm.main.showPlayerRating(".." + avatar);
+							// vm.main.showWinner(".." + avatar, result);
 						}
 						else{
 							console.log("rate moment");
 							//rate moment
-							//TODO: Call showRating when available
+							vm.main.showMomentRating(result);
 						}
 						break;
 
@@ -92,7 +92,7 @@ angular.module("screenModule", [])
 						break;
 
 					case "RATINGEND":
-						//TODO: Hide rating
+						vm.main.hidePlayerRating();
 						break;
 
 					case "GAMEEND":
