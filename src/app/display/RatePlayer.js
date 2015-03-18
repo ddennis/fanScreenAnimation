@@ -63,6 +63,7 @@ function RatePlayer(loaderApi){
 	this.imageSpriteYpos = 3
 	// call back function
 	this.__imageLoaded = this.imageLoaded.bind(this)
+    this.__imageRemove = this.imageRemove.bind(this)
 
 }
 
@@ -131,7 +132,7 @@ RatePlayer.prototype.showPlayerRating = function (imageUrl, winnerFullName) {
 
 RatePlayer.prototype.hidePlayerRating= function () {
 
-	TweenLite.to(this.imageHolder , .5 , {alpha:0, x:-100 , delay:.4, ease:Expo.easeOut});
+	TweenLite.to(this.imageHolder , .5 , {alpha:0, x:-100 , delay:.4, ease:Expo.easeOut, onComplete:this.__imageRemove});
 	TweenLite.to(this.logoHolder , .5 , {alpha:0, x:-80 , delay:.25, ease:Expo.easeOut});
 	TweenLite.to(this.winnerBar.scale , .3 , {x:0, delay:.18, ease:Expo.easeOut});
 	TweenLite.to(this.winnerBar , .3 , {alpha:0, delay:.18, ease:Expo.easeOut});
@@ -139,4 +140,10 @@ RatePlayer.prototype.hidePlayerRating= function () {
 	TweenLite.to(this.winnerNameBar.scale , .4 , {x:0, delay:0, ease:Expo.easeOut});
 	TweenLite.to(this.winnerNameBar , .4 , {alpha:0, delay:0, ease:Expo.easeOut});
 	TweenLite.to(this.winnerTxt , .4 , {alpha:0, delay:0, ease:Expo.easeOut});
+}
+
+
+RatePlayer.prototype.imageRemove = function () {
+    this.imageHolder.removeChild(this.imageSprite)
+    this.imageSprite = null
 }
