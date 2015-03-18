@@ -29,6 +29,9 @@ LoaderApi.prototype.load = function (assetsArr) {
 
     this.loader.addEventListener('onComplete', function (e) {
         that.onAssetLoaded(e)
+
+        /*this.removeEventListener('onComplete', arguments.callee);
+        this.removeEventListener('onProgress', arguments.callee);*/
     });
 
     this.loader.addEventListener('onProgress', function (e) {

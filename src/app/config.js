@@ -20,9 +20,12 @@ var CONFIG = {
 //---------------------------------------------------------------------------------------
 	images:{
 		questionBarLogo: "questionBarLogo.png",
-		logo: "logo.png",		
-		videoStillFrame: "videoStillFrame.png"
-	},
+		logo: "logo.png",
+		videoStillFrame: "videoStillFrame.png",
+		background: "background.png",
+		star: "star.png"
+
+	}
 
 
 

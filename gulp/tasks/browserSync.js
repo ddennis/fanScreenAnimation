@@ -1,11 +1,12 @@
 var browserSync = require('browser-sync');
 var gulp        = require('gulp');
+var buildDir = require("../config").buildDir
 
 gulp.task('browserSync', ['build'], function() {
   browserSync({
     server: {
       // src is included for use with sass source maps
-      baseDir: ['build', 'src'],
+      baseDir: [buildDir , 'src'],
 	    proxy: "localhost:8888"
     },
 
@@ -13,9 +14,9 @@ gulp.task('browserSync', ['build'], function() {
 
     files: [
       // Watch everything in build
-      "build/**",
+      buildDir +"/**",
       // Exclude sourcemap files
-      "!build/**.map"
+      buildDir +"/**.map"
     ], port:4000
   });
 });

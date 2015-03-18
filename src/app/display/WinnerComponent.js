@@ -121,7 +121,6 @@ WinnerComponent.prototype.showWinner = function (imageUrl, winnerFullName) {
     
     this.winnerTxt.setText (winnerFullName.toUpperCase());
     this.winnerNameBar.redraw(this.winnerTxt.width +50);
-
     this.imageUrl = imageUrl
     var arr = [imageUrl]
     this.loaderApi.on(LoaderApi.COMPLETE , this.__imageLoaded )
@@ -132,7 +131,7 @@ WinnerComponent.prototype.showWinner = function (imageUrl, winnerFullName) {
 
 WinnerComponent.prototype.hideWinner = function () {    
     
-    TweenLite.to(this.imageHolder , .6 , {alpha:1, x:-150 , delay:.4, ease:Expo.easeOut});    
+    TweenLite.to(this.imageHolder , .6 , {alpha:0, x:-150 , delay:.4, ease:Expo.easeOut});
     TweenLite.to(this.logoHolder , .5 , {alpha:0, x:-80 , delay:.25, ease:Expo.easeOut});
     TweenLite.to(this.winnerBar.scale , .3 , {x:0, delay:.18, ease:Expo.easeOut});
     TweenLite.to(this.winnerBar , .3 , {alpha:0, delay:.18, ease:Expo.easeOut});    
