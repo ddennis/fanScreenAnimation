@@ -97,11 +97,14 @@ angular.module("screenModule", [])
 
 					case "RATINGEND":
 						if(lastRatingType === "moment"){
+							console.log("hiding moment rating");
 							vm.main.hideMomentRating();
 						}
 						else{
+							console.log("hiding player rating");
 							vm.main.hideRatePlayer();
 						}
+						lastRatingType = null;
 						break;
 
 					case "GAMEEND":
@@ -111,7 +114,6 @@ angular.module("screenModule", [])
 			}
 
 			lastAction = action;
-			lastRatingType = null;
 
 		}
 
