@@ -196,6 +196,7 @@ Main.prototype.hideMomentRating  = function(){
 		this.__showWinnerClick = this.showWinnerClick.bind(this)
 		this.__hideWinnerClick = this.hideWinnerClick.bind(this)
 		this.__showRatingClick = this.showRatingClick.bind(this)
+		this.__hideRatingClick = this.hideRatingClick.bind(this)
 
 
 		var showBtn = new TextBtn("Show question")
@@ -217,6 +218,13 @@ Main.prototype.hideMomentRating  = function(){
 		showRating.y = 500
 		stage.addChild(showRating)
 		showRating.click = this.__showRatingClick
+
+		var hideRating = new TextBtn("hide moment rating")
+		hideRating.interactive = true
+		hideRating.x = 550
+		hideRating.y = 530
+		stage.addChild(hideRating)
+		hideRating.click = this.__hideRatingClick
 
 		var showWinner = new TextBtn("show Winner")
 		showWinner.interactive = true
@@ -259,4 +267,9 @@ Main.prototype.hideMomentRating  = function(){
 
 	Main.prototype.showRatingClick  = function(){
 		this.rateMoment.showMomentRating ()
+	}
+
+	Main.prototype.hideRatingClick= function(){
+		console.log (" Main.js > hideRatingClick ")
+		this.rateMoment.hideMomentRating ()
 	}
