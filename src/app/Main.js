@@ -84,34 +84,29 @@ function Main () {
 		this.rateMoment = new RateMomentComponent()
 		stage.addChild (this.rateMoment)
 
+		this.ratePlayer = new RatePlayer(this.loadApi)
+		this.ratePlayer.x = 180
+		this.ratePlayer.y = 10
+		stage.addChild (this.ratePlayer )
+
+		this.gameWinner = new GameWinner(this.loadApi)
+		this.gameWinner.x = 180
+		this.gameWinner.y = 10
+		stage.addChild (this.gameWinner )
+
+
+
 		//winnerComponent.mask = winnerMask
 
 		// Auto show the first question, while testing
 		//questionBar.show ()
 	
 		// auto show winner
-		//this.showWinnerClick()		
+		//this.showWinnerClick()
+		var imageURL = "images/randomPerson.jpg"
+		this.showGameWinner(imageURL, "POUL BUNDGAARD")
 
 	}
-
-
-/** ---------------------------------------------------------------
- *
- *	Main function for displaying a Moment rating
- *
- */
-
-Main.prototype.showPlayerRating = function(value){
-	console.log (" Main.js > show MOEMNT " )
-
-
-}
-
-Main.prototype.hidePlayerRating   = function(){
-	console.log (" Main.js > HIDE MOMENT " )
-
-}
-
 
 
 
@@ -122,17 +117,46 @@ Main.prototype.hidePlayerRating   = function(){
  */
 
 Main.prototype.showMomentRating = function(value){
-	console.log (" Main.js > show MOEMNT " )
-
-
+	this.showBackground()
+	this.rateMoment.showMomentRating(value)
 }
 
 Main.prototype.hideMomentRating  = function(){
-	console.log (" Main.js > HIDE MOMENT " )
+	this.hideBackground()
+	this.rateMoment.hideMomentRating()
+}
+
+
+/** ---------------------------------------------------------------
+ *	GAME WINNER
+ */
+
+Main.prototype.showGameWinner = function(imageUrl, name){
+	this.showBackground()
+	this.gameWinner.show(imageUrl, name)
+}
+
+Main.prototype.hideGameWinner  = function(){
+	this.hideBackground();
+	this.gameWinner.hide()
 
 }
 
 
+
+/** ---------------------------------------------------------------
+ *	Main function for displaying a PLAYER rating
+ */
+
+Main.prototype.showRatePlayer= function(imageUrl, playerName){
+	this.showBackground()
+	this.ratePlayer.showPlayerRating(imageUrl, playerName)
+}
+
+Main.prototype.hideRatePlayer  = function(){
+	this.hideBackground();
+	this.ratePlayer.hidePlayerRating();
+}
 
 
 /** ---------------------------------------------------------------
@@ -178,7 +202,7 @@ Main.prototype.hideMomentRating  = function(){
 //---------------------------------------------------------------------------------------
 
 	Main.prototype.showBackground  = function(questionText){
-		TweenMax.to(this.background, .3, {alpha:1, ease:"Expo.easeOut"});
+		TweenMax.to(this.background, 1, {alpha:1, ease:"Expo.easeOut"});
 	}
 
 	Main.prototype.hideBackground  = function(questionText){
@@ -197,6 +221,11 @@ Main.prototype.hideMomentRating  = function(){
 		this.__hideWinnerClick = this.hideWinnerClick.bind(this)
 		this.__showRatingClick = this.showRatingClick.bind(this)
 		this.__hideRatingClick = this.hideRatingClick.bind(this)
+		this.__showRatePlayerClick = this.showRatePlayerClick.bind(this)
+		this.__hideRatePlayerClick = this.hideRatePlayerClick.bind(this)
+
+		this.__hideGameWinnerClick= this.hideGameWinnerClick.bind(this)
+		this.__showGameWinnerClick = this.showGameWinnerClick.bind(this)
 
 
 		var showBtn = new TextBtn("Show question")
@@ -214,17 +243,33 @@ Main.prototype.hideMomentRating  = function(){
 
 		var showRating = new TextBtn("show moment rating")
 		showRating.interactive = true
-		showRating.x = 550
+		showRating.x = 510
 		showRating.y = 500
 		stage.addChild(showRating)
 		showRating.click = this.__showRatingClick
 
 		var hideRating = new TextBtn("hide moment rating")
 		hideRating.interactive = true
-		hideRating.x = 550
+		hideRating.x = 510
 		hideRating.y = 530
 		stage.addChild(hideRating)
 		hideRating.click = this.__hideRatingClick
+
+		var showPlayerRating = new TextBtn("show player Rating")
+		showPlayerRating.interactive = true
+		showPlayerRating.x = 800
+		showPlayerRating.y = 500
+		stage.addChild(showPlayerRating)
+		showPlayerRating.click = this.__showRatePlayerClick
+
+
+		var hidePlayerRating = new TextBtn("hide player Rating")
+		hidePlayerRating.interactive = true
+		hidePlayerRating.x = 800
+		hidePlayerRating.y = 530
+		stage.addChild(hidePlayerRating )
+		hidePlayerRating.click = this.__hideRatePlayerClick
+
 
 		var showWinner = new TextBtn("show Winner")
 		showWinner.interactive = true
@@ -239,7 +284,22 @@ Main.prototype.hideMomentRating  = function(){
 		hideWinner.y = 530;
 		stage.addChild(hideWinner)
 		hideWinner.click = this.__hideWinnerClick
-		
+
+
+		var showGameWinner = new TextBtn("show game Winner")
+		showGameWinner.interactive = true
+		showGameWinner.x = 300
+		showGameWinner.y = 400
+		stage.addChild(showGameWinner)
+		showGameWinner.click = this.__showGameWinnerClick
+
+		var hideGameWinner = new TextBtn("Hide game Winner")
+		hideGameWinner.interactive = true
+		hideGameWinner.x = 300;
+		hideGameWinner.y = 430;
+		stage.addChild(hideGameWinner)
+		hideGameWinner.click = this.__hideGameWinnerClick
+
 
 	}
 
@@ -266,10 +326,32 @@ Main.prototype.hideMomentRating  = function(){
 	}
 
 	Main.prototype.showRatingClick  = function(){
-		this.rateMoment.showMomentRating ()
+		this.showMomentRating (3)
 	}
 
 	Main.prototype.hideRatingClick= function(){
-		console.log (" Main.js > hideRatingClick ")
-		this.rateMoment.hideMomentRating ()
+		this.hideMomentRating()
+	}
+
+	Main.prototype.showRatePlayerClick = function(){
+		var p = "images/randomPerson.jpg"
+		this.showRatePlayer(p, "James Bond")
+	}
+
+	Main.prototype.hideRatePlayerClick = function(){
+
+		this.hideRatePlayer()
+	}
+
+//---------------------------------------------------------------------------------------
+
+
+	Main.prototype.showGameWinnerClick = function(){
+		var p = "images/randomPerson.jpg"
+		this.showGameWinner(p, "Egon Olsen")
+	}
+
+	Main.prototype.hideGameWinnerClick = function(){
+
+		this.hideGameWinner()
 	}
