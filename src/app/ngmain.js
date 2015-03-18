@@ -47,26 +47,58 @@ angular.module("screenModule", [])
 
 					case "QUIZEND":
 						console.log("QUIZEND ::: " + winnername + " ::: " + avatar);
-						//TODO: If no winner, only show correct answer
 						vm.main.hideQuestion();
-						// $timeout(function(){
-						// 	vm.main.showWinner("http://fan.tv2.dk/winner.jpg", "kenneth");
-						// }, 5000);
+						//TODO: If no winner, only show correct answer
+
+						if(winnername && avatar){
+							vm.main.showWinner("images/" + avatar, winnername);
+						}
 						break;
 
 					case "RATINGEND":
 						console.log("RATINGEND");
+						if(avatar){
+							console.log("rate player");
+							//rate player
+							//TODO: Change to showRating when available
+							vm.main.showWinner(".." + avatar, result);
+						}
+						else{
+							console.log("rate moment");
+							//rate moment
+							//TODO: Call showRating when available
+						}
 						break;
 
 					case "GAMEEND":
 						console.log("GAMEEND");
+						//TODO: Call gameEnd when available
 						break;
 				}
 
 			}
 
-			if (!action && lastAction){
+			if (!action && lastAction){ 
 				console.log("NO ACTION");
+
+				switch(lastAction){
+
+					case "QUIZSTART":
+						vm.main.hideQuestion();
+						break;
+
+					case "QUIZEND":
+						vm.main.hideWinner();
+						break;
+
+					case "RATINGEND":
+						//TODO: Hide rating
+						break;
+
+					case "GAMEEND":
+						//TODO: Hide gameend
+						break;
+				}
 			}
 
 			lastAction = action;
