@@ -11,12 +11,10 @@ function Main () {
     PIXI.EventTarget.call(this);
 };
 
-
 //---------------------------------------------------------------------------------------
 	Main.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 	Main.prototype.constructor = Main;
 //---------------------------------------------------------------------------------------
-
 
 	Main.prototype.init = function(){
 
@@ -39,11 +37,14 @@ function Main () {
 	};
 
 
+    Main.prototype.cacheBust = function(imageUrl){
+        return imageUrl + "?" + Math.random()
+    }
+
+
 
 //---------------------------------------------------------------------------------------
 
-	
-	
 	
 	Main.prototype.assetsLoaded  = function(){
 		this.assetIsLoaded = true;
@@ -133,13 +134,12 @@ Main.prototype.hideMomentRating  = function(){
 
 Main.prototype.showGameWinner = function(imageUrl, name){
 	this.showBackground()
-	this.gameWinner.show(imageUrl, name)
+	this.gameWinner.show(this.cacheBust(imageUrl) , name)
 }
 
-Main.prototype.hideGameWinner  = function(){
+Main.prototype.hideGameWinner = function(){
 	this.hideBackground();
 	this.gameWinner.hide()
-
 }
 
 
@@ -150,7 +150,7 @@ Main.prototype.hideGameWinner  = function(){
 
 Main.prototype.showRatePlayer= function( imageUrl, playerName){
 	this.showBackground()
-	this.ratePlayer.showPlayerRating(imageUrl, playerName)
+	this.ratePlayer.showPlayerRating(this.cacheBust(imageUrl), playerName)
 }
 
 Main.prototype.hideRatePlayer  = function(){
@@ -192,10 +192,10 @@ Main.prototype.hideRatePlayer  = function(){
 	}
 
 
-	Main.prototype.showWinner  = function(imageURL , fullname){
+	Main.prototype.showWinner  = function(imageUrl , fullname){
 		this.showBackground()
 
-		this.winnerComponent.showWinner (imageURL, fullname);
+		this.winnerComponent.showWinner (this.cacheBust(imageUrl), fullname);
 	}
 
 // BACKGROUND
@@ -258,7 +258,7 @@ Main.prototype.hideRatePlayer  = function(){
 		var showPlayerRating = new TextBtn("show player Rating")
 		showPlayerRating.interactive = true
 		showPlayerRating.x = 800
-		showPlayerRating.y = 500
+		showPlayerRating.y = 200
 		stage.addChild(showPlayerRating)
 		showPlayerRating.click = this.__showRatePlayerClick
 
@@ -266,7 +266,7 @@ Main.prototype.hideRatePlayer  = function(){
 		var hidePlayerRating = new TextBtn("hide player Rating")
 		hidePlayerRating.interactive = true
 		hidePlayerRating.x = 800
-		hidePlayerRating.y = 530
+		hidePlayerRating.y = 230
 		stage.addChild(hidePlayerRating )
 		hidePlayerRating.click = this.__hideRatePlayerClick
 
@@ -336,12 +336,13 @@ Main.prototype.hideRatePlayer  = function(){
 	Main.prototype.showRatePlayerClick = function(){
     var p = ""
         if(this.testCount == 0 ){
-            p = "images/randomPerson.jpg"
+            p = "images/randomPerson.jpg?"+Math.random()
             this.testCount++
         }else{
-            p = "images/winner.jpg"
+            p = "images/winner.jpg?"+Math.random()
             this.testCount = 0
         }
+        console.log (" Main.js > p = " , p);
 		this.showRatePlayer(p, "James Bond")
 	}
 

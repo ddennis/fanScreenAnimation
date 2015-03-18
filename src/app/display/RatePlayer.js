@@ -137,7 +137,6 @@ RatePlayer.prototype.showPlayerRating = function (imageUrl, winnerFullName) {
 
 
 RatePlayer.prototype.hidePlayerRating= function () {
-
 	TweenLite.to(this.imageHolder , .5 , {alpha:0, x:-100 , delay:.4, ease:Expo.easeOut, onComplete:this.__imageRemove});
 	TweenLite.to(this.logoHolder , .5 , {alpha:0, x:-80 , delay:.25, ease:Expo.easeOut});
 	TweenLite.to(this.winnerBar.scale , .3 , {x:0, delay:.18, ease:Expo.easeOut});
