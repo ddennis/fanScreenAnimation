@@ -59,35 +59,21 @@ RateMomentComponent.prototype.constructor = RateMomentComponent;
 
 RateMomentComponent.prototype.showMomentRating  = function (v) {
 
-	var value = v || 5
-
+	var value = v || 5;
 	var scale = 2
 	var len = this.starArr.length
 	for (var i=0;i<len;i++){
 		var star = this.starArr[i]
-		//star.x = star.orgXpos - 50
-		//TweenMax.to(star ,.5, {x:star.orgXpos, alpha:1 , delay:i/20, ease:"Expo.easeOut"});
 		star.scale.x = scale;
 		star.scale.y = scale;
-		//star.tint = 0x000000
-		TweenMax.to(star ,.5, {x:star.orgXpos, alpha:1 , delay:i/20, ease:"Expo.easeOut"});
-		TweenMax.to(star.scale ,1, {x:.8, y:.8, delay:i/20, ease:"Expo.easeOut"});
-
-		//TweenMax.to(star ,.5, {alpha:.2 , delay:.5 +i/20, ease:"Expo.easeOut"});
-		//TweenMax.to(star ,.5, {alpha:1 , delay:1 +i/20, ease:"Expo.easeOut"});
-		//TweenMax.to(star ,.5, { tint:0x000000, delay:.5, ease:"Expo.easeOut"});
+		TweenMax.to(star ,.5, {x:star.orgXpos, alpha:1 , delay:1 +i/20, ease:"Expo.easeOut"});
+		TweenMax.to(star.scale ,1, {x:.8, y:.8, delay:1 + i/20, ease:"Expo.easeOut"});
 	}
 
-
-	//var starIndex = Math.floor(value/2)
-
 	var starpos = (value/2) * (this.starWidth  + this.starPadding);
-
 	var maskx = (this.starContainer.x - this.theMask.width - this.starWidth) + starpos + 13
 	this.theMask.x = maskx
 	//TweenMax.to(this.theMask ,0, {x:maskx, delay:1, ease:"Expo.easeOut"});
-
-
 }
 
 
