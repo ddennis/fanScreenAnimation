@@ -37,6 +37,7 @@ function Main () {
 	};
 
 
+
     Main.prototype.cacheBust = function(imageUrl){
         return imageUrl + "?" + Math.random()
     }
