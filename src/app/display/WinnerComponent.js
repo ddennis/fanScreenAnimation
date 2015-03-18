@@ -80,15 +80,14 @@ WinnerComponent.prototype.constructor = WinnerComponent;
 WinnerComponent.prototype.imageLoaded = function (e) {
     console.log("sdfsdf" )
 
-    this.loaderApi.off(LoaderApi.COMPLETE , this.__imageLoaded)
+    this.loaderApi.off(LoaderApi.COMPLETE , this.__imageLoaded);
     
-    var imageTexture = new PIXI.Texture.fromImage(this.imageUrl)    
-    this.imageSprite = new PIXI.Sprite(imageTexture)
+    var imageTexture = new PIXI.Texture.fromImage(this.imageUrl);
+    this.imageSprite = new PIXI.Sprite(imageTexture);
     
     this.imageSprite.x = this.imageSpriteYpos
     this.imageSprite.y = this.imageSpriteYpos
-    this.imageHolder.addChild(this.imageSprite)
-
+    this.imageHolder.addChild(this.imageSprite);
 
 // Animation
 // -------------------------------------------------------------------------------------
@@ -98,7 +97,6 @@ WinnerComponent.prototype.imageLoaded = function (e) {
     
     this.logoHolder.x = -90
     TweenLite.to(this.logoHolder , .4 , {alpha:1, x:10 , delay:.2, ease:Strong.easeOut});
-
 
     this.winnerBar.scale.x = 0
     TweenLite.to(this.winnerBar.scale , .3 , {x:1, delay:.4, ease:Strong.easeOut});

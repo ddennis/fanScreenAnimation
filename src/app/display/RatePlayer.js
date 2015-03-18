@@ -58,6 +58,7 @@ function RatePlayer(loaderApi){
 	this.winnerNameBar.alpha = 0
 	this.winnerBar.alpha = 0
 
+    this.testXpos = 10
 
 	// Vars
 	this.imageSpriteYpos = 3
@@ -85,7 +86,12 @@ RatePlayer.prototype.imageLoaded = function (e) {
 	var imageTexture = new PIXI.Texture.fromImage(this.imageUrl)
 	this.imageSprite = new PIXI.Sprite(imageTexture)
 
-	this.imageSprite.x = this.imageSpriteYpos
+    
+    console.log (" RatePlayer.js > this.testXpos = " , this.testXpos);
+    this.imageSprite.x = this.testXpos
+    this.testXpos = this.testXpos +20;
+
+    //this.imageSprite.x = this.imageSpriteYpos
 	this.imageSprite.y = this.imageSpriteYpos
 	this.imageHolder.addChild(this.imageSprite)
 
