@@ -94,7 +94,7 @@ function Main () {
 		this.gameWinner.y = 10
 		stage.addChild (this.gameWinner )
 
-
+        this.testCount = 0
 
 		//winnerComponent.mask = winnerMask
 
@@ -148,7 +148,7 @@ Main.prototype.hideGameWinner  = function(){
  *	Main function for displaying a PLAYER rating
  */
 
-Main.prototype.showRatePlayer= function(imageUrl, playerName){
+Main.prototype.showRatePlayer= function( imageUrl, playerName){
 	this.showBackground()
 	this.ratePlayer.showPlayerRating(imageUrl, playerName)
 }
@@ -334,7 +334,14 @@ Main.prototype.hideRatePlayer  = function(){
 	}
 
 	Main.prototype.showRatePlayerClick = function(){
-		var p = "images/randomPerson.jpg"
+    var p = ""
+        if(this.testCount == 0 ){
+            p = "images/randomPerson.jpg"
+            this.testCount++
+        }else{
+            p = "images/winner.jpg"
+            this.testCount = 0
+        }
 		this.showRatePlayer(p, "James Bond")
 	}
 
