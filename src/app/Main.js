@@ -103,8 +103,8 @@ function Main () {
 	
 		// auto show winner
 		//this.showWinnerClick()
-		var imageURL = "images/randomPerson.jpg"
-		this.showGameWinner(imageURL, "POUL BUNDGAARD")
+		// var imageURL = "images/randomPerson.jpg"
+		// this.showGameWinner(imageURL, "POUL BUNDGAARD")
 
 	}
 

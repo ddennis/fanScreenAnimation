@@ -26,6 +26,7 @@ angular.module("screenModule", [])
 		}, 3000);
 
 		var lastAction = null;
+		var lastRatingType = null;
 
 		var parseDatastring = function(data){
 			var question = data.question[0];
@@ -60,19 +61,22 @@ angular.module("screenModule", [])
 						if(avatar){
 							console.log("rate player");
 							//rate player
-							vm.main.showPlayerRating(".." + avatar);
+							vm.main.showRatePlayer(".." + avatar, result);
+							lastRatingType = "player";
 							// vm.main.showWinner(".." + avatar, result);
 						}
 						else{
 							console.log("rate moment");
 							//rate moment
-							vm.main.showMomentRating(result);
+							console.log("rate moment result: " + result);
+							vm.main.showMomentRating(parseInt(result));
+							lastRatingType = "moment";
 						}
 						break;
 
 					case "GAMEEND":
 						console.log("GAMEEND");
-						//TODO: Call gameEnd when available
+						vm.main.showGameWinner("images/" + avatar, winnername);
 						break;
 				}
 
@@ -92,16 +96,22 @@ angular.module("screenModule", [])
 						break;
 
 					case "RATINGEND":
-						vm.main.hidePlayerRating();
+						if(lastRatingType === "moment"){
+							vm.main.hideMomentRating();
+						}
+						else{
+							vm.main.hideRatePlayer();
+						}
 						break;
 
 					case "GAMEEND":
-						//TODO: Hide gameend
+						vm.main.hideGameWinner();
 						break;
 				}
 			}
 
 			lastAction = action;
+			lastRatingType = null;
 
 		}
 
