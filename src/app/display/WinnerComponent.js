@@ -144,7 +144,7 @@ WinnerComponent.prototype.imageLoaded = function (e) {
 
 WinnerComponent.prototype.showWinner = function (imageUrl, winnerFullName) {
     this.winnerTxt.setText (winnerFullName.toUpperCase());
-    this.winnerNameBarWidth = this.winnerTxt.width +50
+    this.winnerNameBarWidth = this.winnerTxt.width +50;
     this.winnerNameBar.redraw(this.winnerNameBarWidth );
     this.imageUrl = imageUrl
     var arr = [imageUrl]

@@ -1,69 +1,76 @@
 
 
 function GameWinner(loaderApi){
-	"use strict";
-	PIXI.DisplayObjectContainer.call(this);
-	PIXI.EventTarget.call(this);
+    "use strict";
+    PIXI.DisplayObjectContainer.call(this);
+    PIXI.EventTarget.call(this);
 
-	this.loaderApi = loaderApi;
+    this.loaderApi = loaderApi
 
-	this.imageHolder = new PIXI.DisplayObjectContainer()
+    this.imageHolder = new PIXI.DisplayObjectContainer()
+    this.imageHolder.y = 9
+    this.addChild(this.imageHolder)
 
+    this.winnerBar = new Bar (180, 0x000643)
+    this.winnerBar.x = 56
+    this.winnerBar.y = 27
+    this.addChildAt(this.winnerBar, 0)
 
-	var blueImageBackground = new PixiBox (81,81, 0x17acd5)
-	this.imageHolder.addChild(blueImageBackground)
-	this.addChild(this.imageHolder)
+    this.winnerNameBar = new Bar (100)
+    this.winnerNameBar.x = 56
+    this.winnerNameBar.y = 53
+    this.addChildAt(this.winnerNameBar, 0)
 
+    this.fastTxt = new PIXI.Text("VINDER AF KAMPEN", {fill:"#e3da02", font:"14px alright_sansultra_italic"});
+    this.fastTxt.x = 90
+    this.fastTxt.y = 34
+    this.addChild(this.fastTxt)
 
-	// Logo holder with extra blue background
-	this.logoHolder = new PIXI.DisplayObjectContainer()
-	this.logo = new PIXI.Sprite (new PIXI.Texture.fromImage (ASSETS.questionBarLogo))
-	this.logo.x = 55
-	this.logo.y = 1
-	this.blueBar = new Bar (20, 0x17acd5)
-	this.blueBar.x = 50
+    this.winnerTxt = new PIXI.Text("test", {fill:"#000000", font:"16px alright_sansultra_italic"});
+    this.winnerTxt.x = 90
+    this.winnerTxt.y = 61
+    this.addChild(this.winnerTxt)
 
-/*	// add to logoHolder
-	this.logoHolder.addChild(this.blueBar)
-	this.logoHolder.addChild(this.logo)
-	this.addChildAt(this.logoHolder, 0)*/
-
-	this.logoHolder.x = 10
-	this.logoHolder.y = -1
-
-	/*this.winnerBar = new Bar (190, 0x17acd5)
-	this.winnerBar.x = 56
-	this.winnerBar.y = 54
-	this.addChildAt(this.winnerBar, 0)*/
-
-	/*this.winnerNameBar = new Bar (100)
-	this.winnerNameBar.x = this.winnerBar.x + this.winnerBar.width - 20
-	this.winnerNameBar.y = 54
-	this.addChildAt(this.winnerNameBar, 0)*/
-
-	this.fastTxt = new PIXI.Text("KAMPENS VINDER", {fill:"#ffffff", font:"20px alright_sansultra_italic"});
-	this.fastTxt.x = 90
-	this.fastTxt.y = 62
-	this.addChild(this.fastTxt)
-
-	this.winnerTxt = new PIXI.Text("test", {fill:"#17acd5", font:"20px alright_sansultra_italic"});
-	this.winnerTxt.x = 300 //this.winnerNameBar.x +30
-	this.winnerTxt.y = 62
-	this.addChild(this.winnerTxt)
-
-	this.imageHolder.alpha = 0
-	this.logoHolder.alpha = 0
-	this.winnerTxt.alpha = 0
-	this.fastTxt.alpha = 0
-	/*this.winnerNameBar.alpha = 0*/
-	//this.winnerBar.alpha = 0
+    this.logo = new PIXI.Sprite (new PIXI.Texture.fromImage (ASSETS.questionBarLogo))
+    this.logo.x = 10
+    this.logo.y = 53
+    this.logo.alpha = 0;
+    this.addChildAt(this.logo, 0)
 
 
-	// Vars
-	this.imageSpriteYpos = 3
-	// call back function
-	this.__imageLoaded = this.imageLoaded.bind(this)
+    this.imageHolder.alpha = 0
+
+    this.winnerTxt.alpha = 0
+    this.fastTxt.alpha = 0
+    this.winnerNameBar.alpha = 0
+    this.winnerBar.alpha = 0
+
+
+    this.maskCircle = new PixiCircle(38)
+    this.maskCircle.x = 81*.5
+    this.maskCircle.y = 81*.5
+    //this.maskCircle.alpha = 0
+    this.imageHolder.addChild(this.maskCircle)
+
+    this.outLine = new PIXI.Graphics ();
+    this.outLine.x = this.maskCircle.x
+    this.outLine.y = this.maskCircle.y
+    this.outLine.color  = 0xFF0000
+    this.outLine.lineStyle (4, 0x000643, 1)
+    this.outLine.drawCircle(0,0, 38)
+    this.imageHolder.addChild(this.outLine)
+
+
+
+
+
+
+    // Vars
+    this.imageSpriteYpos = 3;
+    // call back function 
+    this.__imageLoaded = this.imageLoaded.bind(this)
     this.__imageRemove = this.imageRemove.bind(this)
+
 }
 
 
@@ -77,69 +84,85 @@ GameWinner.prototype.constructor = GameWinner;
 
 // Private function
 GameWinner.prototype.imageLoaded = function (e) {
-	console.log("sdfsdf" )
+    console.log("sdfsdf" )
 
-	this.loaderApi.off(LoaderApi.COMPLETE , this.__imageLoaded)
+    this.loaderApi.off(LoaderApi.COMPLETE , this.__imageLoaded);
 
-	var imageTexture = new PIXI.Texture.fromImage(this.imageUrl)
-	this.imageSprite = new PIXI.Sprite(imageTexture)
+    var imageTexture = new PIXI.Texture.fromImage(this.imageUrl);
+    this.imageSprite = new PIXI.Sprite(imageTexture);
+    this.imageHolder.addChild(this.imageSprite);
 
-	this.imageSprite.x = this.imageSpriteYpos
-	this.imageSprite.y = this.imageSpriteYpos
-	this.imageHolder.addChild(this.imageSprite)
 
+    if(this.imageSprite.width >= 100 ){
+        var k = 81/this.imageSprite.width
+        var kk = 81/this.imageSprite.height
+        this.imageSprite.width = 86
+        this.imageSprite.scale.y = this.imageSprite.scale.x
+        this.imageSprite.x = -10
+        this.imageSprite.y = 0
+    }else{
+        this.imageSprite.x = 3
+        this.imageSprite.y = 3
+    }
+
+
+
+
+
+    this.imageSprite.mask = this.maskCircle;
+    this.imageHolder.addChild(this.outLine)
 
 // Animation
 // -------------------------------------------------------------------------------------
 
-	this.imageHolder.x = -90
-	TweenLite.to(this.imageHolder , .4 , {alpha:1, x:0 , delay:0, ease:Strong.easeOut});
+    this.imageHolder.x = -90
+    TweenLite.to(this.imageHolder , .4 , {alpha:1, x:0 , delay:0, ease:Strong.easeOut});
 
-	this.logoHolder.x = -90
-	TweenLite.to(this.logoHolder , .4 , {alpha:1, x:10 , delay:.2, ease:Strong.easeOut});
+    this.winnerBar.scale.x = 0
+    TweenLite.to(this.winnerBar.scale , .3 , {x:1, delay:.4, ease:Strong.easeOut});
+    TweenLite.to(this.winnerBar , .2 , {alpha:1, delay:.4, ease:Strong.easeOut});
+
+    this.fastTxt.x = 70;
+    TweenLite.to(this.fastTxt , .3 , {x:90, alpha:1, delay:.5, ease:Strong.easeOut});
+
+    this.winnerNameBar.scale.x = 0
+    TweenLite.to(this.winnerNameBar.scale , .4 , {x:1, delay:.6, ease:Strong.easeOut});
+    TweenLite.to(this.winnerNameBar , .4 , {alpha:1, delay:.6, ease:Strong.easeOut});
 
 
-	/*this.winnerBar.scale.x = 0
-	TweenLite.to(this.winnerBar.scale , .3 , {x:1, delay:.4, ease:Strong.easeOut});
-	TweenLite.to(this.winnerBar , .2 , {alpha:1, delay:.4, ease:Strong.easeOut});*/
+    TweenLite.to(this.winnerTxt , .4 , {alpha:1, delay:.65, ease:Strong.easeOut});
 
-	this.fastTxt.x = 70;
-	TweenLite.to(this.fastTxt , .3 , {x:90, alpha:1, delay:.5, ease:Strong.easeOut});
-
-	/*this.winnerNameBar.scale.x = 0*/
-	/*TweenLite.to(this.winnerNameBar.scale , .4 , {x:1, delay:.6, ease:Strong.easeOut});*/
-	/*TweenLite.to(this.winnerNameBar , .4 , {alpha:1, delay:.6, ease:Strong.easeOut});*/
-
-	TweenLite.to(this.winnerTxt , .4 , {alpha:1, delay:.65, ease:Strong.easeOut});
+    this.logo.x = this.winnerNameBarWidth
+    TweenLite.to(this.logo,.4 , {x:this.winnerNameBarWidth + 55 , alpha:1, delay:.7, ease:Strong.easeOut});
 
 
 }
 
 
-
 GameWinner.prototype.show = function (imageUrl, winnerFullName) {
-
-	this.winnerTxt.setText (winnerFullName.toUpperCase());
-	/*this.winnerNameBar.redraw(this.winnerTxt.width +50);*/
-	this.imageUrl = imageUrl
-	var arr = [imageUrl]
-	this.loaderApi.on(LoaderApi.COMPLETE , this.__imageLoaded )
-	this.loaderApi.load(arr)
-
+    this.winnerTxt.setText (winnerFullName.toUpperCase());
+    this.winnerNameBarWidth = this.winnerTxt.width +50;
+    this.winnerNameBar.redraw(this.winnerNameBarWidth );
+    this.imageUrl = imageUrl
+    var arr = [imageUrl]
+    this.loaderApi.on(LoaderApi.COMPLETE , this.__imageLoaded )
+    this.loaderApi.load(arr)
 }
 
 
 GameWinner.prototype.hide = function () {
+    TweenLite.to(this.imageHolder , .2 , {alpha:0, x:-20 , delay:.5, ease:Expo.easeOut, onComplete:this.__imageRemove });
 
-	TweenLite.to(this.imageHolder , .5 , {alpha:0, x:-100 , delay:.4, ease:Expo.easeOut, onComplete:this.__imageRemove});
-	TweenLite.to(this.logoHolder , .5 , {alpha:0, x:-80 , delay:.25, ease:Expo.easeOut});
-	/*TweenLite.to(this.winnerBar.scale , .3 , {x:0, delay:.18, ease:Expo.easeOut});
-	TweenLite.to(this.winnerBar , .3 , {alpha:0, delay:.18, ease:Expo.easeOut});*/
-	TweenLite.to(this.fastTxt , .3 , {x:80, alpha:0, delay:.1, ease:Expo.easeOut});
-	/*TweenLite.to(this.winnerNameBar.scale , .4 , {x:0, delay:0, ease:Expo.easeOut});*/
-	/*TweenLite.to(this.winnerNameBar , .4 , {alpha:0, delay:0, ease:Expo.easeOut});*/
-	TweenLite.to(this.winnerTxt , .4 , {alpha:0, delay:0, ease:Expo.easeOut});
+    TweenLite.to(this.logo , .3 , {alpha:0, x:-80 , delay:.1, ease:Expo.easeOut});
+    TweenLite.to(this.winnerBar.scale , .3 , {x:0, delay:.18, ease:Expo.easeOut});
+    TweenLite.to(this.winnerBar , .3 , {alpha:0, delay:.18, ease:Expo.easeOut});
+    TweenLite.to(this.fastTxt , .3 , {x:80, alpha:0, delay:.1, ease:Expo.easeOut});
+    TweenLite.to(this.winnerNameBar.scale , .4 , {x:0, delay:0, ease:Expo.easeOut});
+    TweenLite.to(this.winnerNameBar , .4 , {alpha:0, delay:0, ease:Expo.easeOut});
+    TweenLite.to(this.winnerTxt , .4 , {alpha:0, delay:0, ease:Expo.easeOut});
 }
+
+
 
 
 GameWinner.prototype.imageRemove = function () {
