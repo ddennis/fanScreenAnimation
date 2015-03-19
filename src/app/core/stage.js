@@ -16,6 +16,7 @@ var rendererOptions = {
 
 //var renderer = PIXI.autoDetectRecommendedRenderer(stageWidth, stageHeight, rendererOptions);
 var renderer = new PIXI.CanvasRenderer(stageWidth, stageHeight, rendererOptions);
+//var renderer = new PIXI.WebGLRenderer(stageWidth, stageHeight, rendererOptions)
 
 
 

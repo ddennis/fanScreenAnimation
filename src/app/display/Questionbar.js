@@ -75,7 +75,7 @@ function Questionbar (s) {
 
         var d = .2;
         TweenLite.to(this.bar , .6 , {x: -this.bar.width  , delay:d, ease:Strong.easeOut});
-        TweenLite.to(this.text , .6 , {x:-50 , alpha:0, delay:d, ease:Strong.easeOut});        
+        TweenLite.to(this.text , .2 , {x:-50 , alpha:0, delay:d , ease:Strong.easeOut});
 
     };
 

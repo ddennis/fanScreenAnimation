@@ -79,12 +79,14 @@ function Main () {
 		
 		var winnerComponent = new WinnerComponent(this.loadApi)
 		stage.addChild(winnerComponent)
-		winnerComponent.x = 180
-		winnerComponent.y = this.elementYpos - 20
+		winnerComponent.x = 175;
+		winnerComponent.y = this.elementYpos - 40
 		this.winnerComponent = winnerComponent
 
 		this.rateMoment = new RateMomentComponent()
-		stage.addChild (this.rateMoment)
+        this.rateMoment.x = 180
+        this.rateMoment.y = 35
+        stage.addChild (this.rateMoment)
 
 		this.ratePlayer = new RatePlayer(this.loadApi)
 		this.ratePlayer.x = 180
@@ -107,6 +109,11 @@ function Main () {
 		//this.showWinnerClick()
 		// var imageURL = "images/randomPerson.jpg"
 		// this.showGameWinner(imageURL, "POUL BUNDGAARD")
+
+        //this.showMomentRating(6)
+        var imageURL = "images/tarik_black.png"
+        //this.showWinner( imageURL, "Anders AØNDERGAARD" )
+        this.showRatePlayer(imageURL,"RGAARD" )
 
 	}
 
@@ -195,7 +202,6 @@ Main.prototype.hideRatePlayer  = function(){
 
 	Main.prototype.showWinner  = function(imageUrl , fullname){
 		this.showBackground()
-
 		this.winnerComponent.showWinner (this.cacheBust(imageUrl), fullname);
 	}
 
@@ -203,11 +209,11 @@ Main.prototype.hideRatePlayer  = function(){
 //---------------------------------------------------------------------------------------
 
 	Main.prototype.showBackground  = function(questionText){
-		TweenMax.to(this.background, 1, {alpha:1, ease:"Expo.easeOut"});
+		//TweenMax.to(this.background, 1, {alpha:1, ease:"Expo.easeOut"});
 	}
 
 	Main.prototype.hideBackground  = function(questionText){
-		TweenMax.to(this.background,2, {alpha:0,delay:.2,  ease:"Expo.easeOut"});
+		//TweenMax.to(this.background,2, {alpha:0,delay:.2,  ease:"Expo.easeOut"});
 
 	}
 

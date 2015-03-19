@@ -23,6 +23,8 @@ var CONFIG = {
 		logo: "logo.png",
 		videoStillFrame: "videoStillFrame.png",
 		background: "background.png",
+		fantastiskBar: "fantastiskBar.png",
+        kampenSpiller: "kampenSpiller.png",
 		star: "star.png"
 
 	}
