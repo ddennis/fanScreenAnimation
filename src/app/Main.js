@@ -112,10 +112,10 @@ function Main () {
 
         //this.showMomentRating(6)
        // var imageURL = "images/tarik_black.png"
-        var imageURL = "images/winner.jpg"
+        // var imageURL = "images/winner.jpg"
         //this.showWinner( imageURL, "Anders AØNDERGAARD" )
         //this.showRatePlayer(imageURL,"RGAARD" )
-        this.showGameWinner(imageURL,"PETER POUL JENSEN" )
+        // this.showGameWinner(imageURL,"PETER POUL JENSEN" )
 
 	}
 
