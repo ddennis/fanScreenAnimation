@@ -21,7 +21,7 @@ function GameWinner(loaderApi){
     this.winnerNameBar.y = 53
     this.addChildAt(this.winnerNameBar, 0)
 
-    this.fastTxt = new PIXI.Text("VINDER AF KAMPEN", {fill:"#e3da02", font:"14px alright_sansultra_italic"});
+    this.fastTxt = new PIXI.Text("DAGENS FAN", {fill:"#e3da02", font:"14px alright_sansultra_italic"});
     this.fastTxt.x = 90
     this.fastTxt.y = 34
     this.addChild(this.fastTxt)

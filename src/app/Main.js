@@ -112,7 +112,7 @@ function Main () {
 
         //this.showMomentRating(6)
        // var imageURL = "images/tarik_black.png"
-        var imageURL = "images/winner.jpg"
+        var imageURL = "images/randomPerson.jpg"
         //this.showWinner( imageURL, "Anders AØNDERGAARD" )
         //this.showRatePlayer(imageURL,"RGAARD" )
         this.showGameWinner(imageURL,"PETER POUL JENSEN" )
@@ -237,7 +237,7 @@ Main.prototype.hideRatePlayer  = function(){
 		this.__showGameWinnerClick = this.showGameWinnerClick.bind(this)
 
 
-		var showBtn = new TextBtn("Show question")
+		/*var showBtn = new TextBtn("Show question")
 		showBtn.interactive = true
 		showBtn.x = 20
 		showBtn.y = 500
@@ -309,7 +309,7 @@ Main.prototype.hideRatePlayer  = function(){
 		stage.addChild(hideGameWinner)
 		hideGameWinner.click = this.__hideGameWinnerClick
 
-
+*/
 	}
 
 //-------------------------------------------------------
