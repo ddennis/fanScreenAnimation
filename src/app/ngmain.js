@@ -1,25 +1,33 @@
 angular.module("screenModule", [])
 	.controller("screenController", ["$scope", "$http", "$interval", "$timeout", function($scope, $http, $interval, $timeout){
 
-		var vm = this
+		var vm = this	
 		// init banner
         vm.main = new Main ();
         vm.main.init();
         vm.main.setupTestBtns()
 
         var host = document.location.hostname; 
-        var datastringUrl;
-        if(host === 'localhost'){
-        	datastringUrl = 'http://localhost:3000/onair/get_datastring';
-        }
-        else{
-        	datastringUrl = 'http://fan.tv2.dk/onair/get_datastring';
-        }
+        // var datastringUrl;
+
+        // if(host === 'localhost'){
+        // 	// datastringUrl = 'http://localhost:3000/onair/get_datastring';
+        // 	datastringUrl = 'http://localhost:3000/onairdatastreng.xml';
+        // }
+        // else{
+        // 	// datastringUrl = 'http://fan.tv2.dk/onair/get_datastring';
+        // 	datastringUrl = 'http://testingfan.herokuapp.com/onairdatastreng.xml';
+        // }
+
+        // var datastringUrl = host === 'localhost' ? 'http://localhost:3000/onairdatastreng.xml' : 'http://testingfan.herokuapp.com/onairdatastreng.xml'; 
+        var datastringUrl = host === 'localhost' ? 'http://localhost:3000/onair/get_datastring' : 'http://testingfan.herokuapp.com/onair/get_datastring'; 
 
 		$interval(function(){
 			$http.get(datastringUrl).success(function(data){
+				// var parser = new DOMParser();
+				// var doc = parser.parseFromString(data, "text/xml");
+				// console.log(data);
 				var datastring = data.Root.item[0];
-				// console.log("datastring: " + JSON.stringify(datastring, null, 2));
 				parseDatastring(datastring);
 			});
 

@@ -115,7 +115,7 @@ function Main () {
         var imageURL = "images/randomPerson.jpg"
         //this.showWinner( imageURL, "Anders AØNDERGAARD" )
         //this.showRatePlayer(imageURL,"RGAARD" )
-        this.showGameWinner(imageURL,"PETER POUL JENSEN" )
+        // this.showGameWinner(imageURL,"PETER POUL JENSEN" )
 
 	}
 
