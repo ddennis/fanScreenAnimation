@@ -19,8 +19,8 @@ angular.module("screenModule", [])
         // 	datastringUrl = 'http://testingfan.herokuapp.com/onairdatastreng.xml';
         // }
 
-        // var datastringUrl = host === 'localhost' ? 'http://localhost:3000/onairdatastreng.xml' : 'http://testingfan.herokuapp.com/onairdatastreng.xml'; 
-        var datastringUrl = host === 'localhost' ? 'http://localhost:3000/onair/get_datastring' : 'http://testingfan.herokuapp.com/onair/get_datastring'; 
+        var datastringUrl = 'http://testingfan.herokuapp.com/onair/get_datastring';
+        // var datastringUrl = host === 'localhost' ? 'http://localhost:3000/onair/get_datastring' : 'http://testingfan.herokuapp.com/onair/get_datastring'; 
 
 		$interval(function(){
 			$http.get(datastringUrl).success(function(data){
@@ -69,7 +69,8 @@ angular.module("screenModule", [])
 						if(avatar){
 							console.log("rate player");
 							//rate player
-							vm.main.showRatePlayer(".." + avatar, result);
+							// vm.main.showRatePlayer(".." + avatar, result);
+							vm.main.showRatePlayer("images/manOfTheMatch.png", result);
 							lastRatingType = "player";
 							// vm.main.showWinner(".." + avatar, result);
 						}
